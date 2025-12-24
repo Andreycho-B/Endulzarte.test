@@ -1,0 +1,611 @@
+/* =========================================
+   1. VARIABLES & CONFIG
+   ========================================= */
+:root {
+    /* Colors - White Premium Palette */
+    --color-primary: #FFFFFF;
+    /* Main background White */
+    --color-secondary: #FAFAFA;
+    /* Off-white for sections */
+    --color-gold: #C5A059;
+    /* Muted Luxury Gold */
+    --color-gold-hover: #B08D45;
+    --color-text-main: #1A1A1A;
+    /* Dark Charcoal for headings */
+    --color-text-body: #4A4A4A;
+    /* Soft Grey for body */
+    --color-white: #FFFFFF;
+
+    /* Gradients / Effects */
+    --gradient-gold: linear-gradient(135deg, #E5C585 0%, #C5A059 100%);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-blur: blur(15px);
+    --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.06);
+
+    /* Typography */
+    --font-title: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 5rem;
+
+    /* Z-Index */
+    --z-nav: 1000;
+    --z-fab: 900;
+    --z-hero-overlay: 10;
+}
+
+/* =========================================
+   2. RESET & BASE
+   ========================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-primary);
+    color: var(--color-text-body);
+    line-height: 1.7;
+    overflow-x: hidden;
+    padding-bottom: 70px;
+    /* Space for bottom nav */
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-title);
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.2;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+/* =========================================
+   3. UTILITIES
+   ========================================= */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: none;
+    box-shadow: 0 4px 15px rgba(197, 160, 89, 0.2);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn--gold {
+    background: var(--gradient-gold);
+    color: white;
+}
+
+.btn--outline {
+    background: transparent;
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold);
+    box-shadow: none;
+}
+
+.btn--outline:hover {
+    background: var(--color-gold);
+    color: white;
+}
+
+/* Animations */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   4. COMPONENTS
+   ========================================= */
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--color-secondary);
+    /* Fallback */
+}
+
+.hero__3d-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.8;
+    /* Subtle 3D presence */
+}
+
+.hero__overlay {
+    position: relative;
+    z-index: var(--z-hero-overlay);
+    text-align: center;
+    padding: 3rem;
+    border-radius: 20px;
+    /* Clean glass effect */
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-soft);
+    max-width: 90%;
+    transform: translateY(0);
+    animation: floatHero 6s ease-in-out infinite;
+}
+
+@keyframes floatHero {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.hero__title {
+    font-size: 4rem;
+    color: var(--color-text-main);
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+}
+
+.hero__subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-body);
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.hero__cta {
+    font-size: 0.9rem;
+    color: var(--color-gold);
+    font-weight: 700;
+    border-bottom: 1px solid var(--color-gold);
+    padding-bottom: 3px;
+    letter-spacing: 1px;
+}
+
+/* --- STAR PRODUCT --- */
+.product-star {
+    padding: var(--spacing-lg) var(--spacing-sm);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+}
+
+.product-star__card {
+    background: var(--color-white);
+    border-radius: 30px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1000px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #F0F0F0;
+}
+
+.product-star__image-wrapper {
+    position: relative;
+    height: 400px;
+    background: #FAFAFA;
+}
+
+.product-star__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.product-star__card:hover .product-star__image {
+    transform: scale(1.05);
+    /* Subtle zoom */
+}
+
+.product-star__badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--color-white);
+    color: var(--color-gold);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.product-star__content {
+    padding: 3rem 2.5rem;
+}
+
+.product-star__title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+}
+
+.product-star__description {
+    color: var(--color-text-body);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+}
+
+.product-star__features {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.feature {
+    text-align: center;
+}
+
+.feature__icon {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    filter: grayscale(100%);
+    /* Minimalist icons */
+    opacity: 0.7;
+}
+
+.feature__text {
+    font-size: 0.75rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.product-star__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-star__price {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    color: var(--color-text-main);
+}
+
+/* --- HISTORY (PARALLAX) --- */
+.history {
+    position: relative;
+    padding: 8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #f4f4f4;
+}
+
+.history__background {
+    position: absolute;
+    top: -10%;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    /* Lighter filter for "White Premium" feel */
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('../assets/img/history-bg.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    will-change: transform;
+    opacity: 0.6;
+}
+
+.history__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.85);
+    /* Whiter card */
+    padding: 4rem 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(10px);
+}
+
+.history__title {
+    font-size: 3rem;
+    color: var(--color-text-main);
+    margin-bottom: 1.5rem;
+}
+
+.history__text {
+    font-size: 1.15rem;
+    color: var(--color-text-body);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+}
+
+/* --- DESSERT CAROUSEL --- */
+.desserts {
+    padding: var(--spacing-lg) 0 8rem;
+    background: var(--color-secondary);
+}
+
+.desserts__title {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--color-text-main);
+    margin-bottom: 4rem;
+}
+
+.desserts__carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 2.5rem;
+    padding: 0 var(--spacing-sm) 3rem;
+    scrollbar-width: none;
+    /* Hide scrollbar Firefox */
+}
+
+.desserts__carousel::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar Chrome/Safari */
+}
+
+.dessert-card {
+    flex: 0 0 300px;
+    scroll-snap-align: center;
+    background: var(--color-white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: none;
+}
+
+.dessert-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dessert-card__img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.dessert-card__info {
+    padding: 2rem;
+    text-align: center;
+    background: white;
+}
+
+.dessert-card__info h3 {
+    font-size: 1.2rem;
+    font-family: var(--font-title);
+    color: var(--color-text-main);
+    margin-bottom: 0.5rem;
+}
+
+.dessert-card__info span {
+    display: block;
+    color: var(--color-gold);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* --- FOOTER --- */
+.footer {
+    background: #FAFAFA;
+    padding: 5rem 2rem 8rem;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+.footer__logo {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    color: var(--color-text-main);
+    margin-bottom: 1rem;
+}
+
+.footer__catchphrase {
+    color: #888;
+    margin-bottom: 3rem;
+    font-style: italic;
+    font-weight: 300;
+}
+
+.footer__socials {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footer__socials a {
+    color: var(--color-text-main);
+    font-size: 1rem;
+    font-weight: 700;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+}
+
+.footer__socials a:hover {
+    color: var(--color-gold);
+    border-color: var(--color-gold);
+}
+
+.footer__copyright {
+    color: #AAA;
+    font-size: 0.8rem;
+}
+
+/* --- FLOATING BUTTON --- */
+.fab-whatsapp {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+    z-index: var(--z-fab);
+    transition: transform 0.3s;
+}
+
+.fab-whatsapp:hover {
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* --- BOTTOM NAV --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    /* Frosted glass white */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: var(--z-nav);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.bottom-nav__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #999;
+    font-size: 0.7rem;
+    transition: color 0.3s;
+    text-decoration: none;
+    padding: 0 0.5rem;
+}
+
+.bottom-nav__item.active,
+.bottom-nav__item:hover {
+    color: var(--color-text-main);
+}
+
+.bottom-nav__icon {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+    /* Optional: Remove emoji color on hover/active if using SVG icons, 
+       but for emojis we just rely on opacity/grayscale in darker themes. 
+       Here they pop against white. */
+}
+
+/* =========================================
+   5. RESPONSIVE QUERIES
+   ========================================= */
+@media (min-width: 768px) {
+    body {
+        padding-bottom: 0;
+    }
+
+    .hero__title {
+        font-size: 6rem;
+    }
+
+    .product-star__card {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .product-star__image-wrapper {
+        flex: 1;
+        height: auto;
+    }
+
+    .product-star__content {
+        flex: 1;
+        padding: 5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .dessert-card {
+        flex: 0 0 320px;
+    }
+
+    /* Desktop Nav similar to mobile but just placed nicely */
+    .bottom-nav {
+        bottom: 30px;
+    }
+}

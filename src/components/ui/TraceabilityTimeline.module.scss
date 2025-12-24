@@ -1,0 +1,146 @@
+@import '../../styles/variables';
+
+.timelineContainer {
+    margin-bottom: 3rem;
+}
+
+.heading {
+    font-family: $font-display;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: $color-text-main;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0; // Gap handled by min-height of step
+}
+
+.step {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+    min-height: 80px;
+
+    &:last-child {
+        min-height: auto;
+
+        .line {
+            display: none;
+        }
+    }
+}
+
+.iconWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    background: $color-surface;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    @include flex-center;
+    font-size: 1.2rem;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.line {
+    flex: 1;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.content {
+    padding-top: 0.5rem;
+    position: relative;
+    cursor: help;
+
+    &:hover {
+        .tooltip {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+    }
+}
+
+.label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $color-text-light;
+    margin-bottom: 0.2rem;
+}
+
+.value {
+    display: block;
+    font-size: 1rem;
+    color: $color-text-main;
+    font-weight: 600;
+}
+
+.tooltip {
+    position: absolute;
+    top: 0;
+    left: 100%; // Right side tooltip
+    margin-left: 1rem;
+    width: 200px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        right: 100%;
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent rgba(0, 0, 0, 0.8) transparent transparent;
+    }
+
+    @media (max-width: 768px) {
+        // On mobile, show below or rely on tap
+        left: 0;
+        top: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+
+        &::before {
+            top: -12px;
+            right: auto;
+            left: 20px;
+            border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
+        }
+    }
+}
+
+.step:hover {
+    .icon {
+        transform: scale(1.1);
+        border-color: #D4AF37;
+    }
+}

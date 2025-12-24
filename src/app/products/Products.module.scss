@@ -1,0 +1,86 @@
+@import '../../styles/variables';
+
+.main {
+    min-height: 100vh;
+    padding-top: 8rem; // Space for navbar
+    background: $color-bg;
+}
+
+.header {
+    padding: 0 $spacing-page;
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.title {
+    font-size: 4rem;
+    color: $color-text-main;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 3rem;
+    padding: 0 $spacing-page 6rem;
+}
+
+.productCard {
+    background: $color-surface;
+    border-radius: $radius-card;
+    overflow: hidden;
+    transition: transform 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 300px; // Explicit height
+    background: #FAFAFA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $color-text-main;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.info {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.meta {
+    h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.2rem;
+    }
+
+    p {
+        color: $color-text-body;
+        font-family: $font-display;
+    }
+}
+
+.btn {
+    padding: 0.6rem 1.5rem; // Smaller button for cards
+    font-size: 0.8rem;
+}

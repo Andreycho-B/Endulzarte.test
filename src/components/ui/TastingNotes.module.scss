@@ -1,0 +1,83 @@
+@import '../../styles/variables';
+
+.container {
+    margin-bottom: 4rem;
+}
+
+.heading {
+    font-family: $font-display;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: $color-text-main;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+    text-align: center;
+}
+
+.notesGrid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+
+    @media (max-width: 600px) {
+        gap: 2rem;
+    }
+}
+
+.noteCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 150px;
+
+    h4 {
+        margin-top: 1rem;
+        font-size: 1rem;
+        color: $color-text-main;
+    }
+
+    p {
+        font-size: 0.85rem;
+        color: $color-text-light;
+        line-height: 1.4;
+    }
+}
+
+.iconCircle {
+    width: 80px;
+    height: 80px;
+    @include glass-button; // Use existing mixin
+    background: white;
+    border-radius: 50%;
+    @include flex-center;
+    font-size: 2rem;
+    box-shadow: $shadow-soft;
+}
+
+.storySection {
+    background: $color-secondary;
+    padding: 3rem;
+    border-radius: $radius-card;
+    text-align: center;
+
+    h3 {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #D4AF37; // Gold
+        margin-bottom: 1.5rem;
+    }
+}
+
+.narrative {
+    font-family: 'Georgia', serif; // Use refined serif for story
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: $color-text-main;
+    max-width: 800px;
+    margin: 0 auto;
+}

@@ -1,0 +1,87 @@
+@import '../../styles/variables';
+
+.navContainer {
+    position: fixed;
+    top: 2rem;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    @include flex-center;
+    pointer-events: none; // Allow clicks to pass through around the nav
+}
+
+.nav {
+    pointer-events: auto;
+    @include glass-panel; // Defined in variables
+    background: rgba(255, 255, 255, 0.75); // Slightly more opaque
+    padding: 0.8rem 2rem;
+    border-radius: $radius-pill;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    min-width: 500px;
+
+    @media (max-width: 768px) {
+        min-width: 90%;
+        gap: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+.logo {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: $color-text-main;
+    letter-spacing: -0.5px;
+}
+
+.links {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+
+    li {
+        position: relative;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: $color-text-body;
+        transition: color 0.3s;
+
+        &.active {
+            color: $color-text-main;
+        }
+
+        &:hover {
+            color: $color-text-main;
+        }
+
+        a {
+            display: block;
+            padding: 0.2rem 0;
+        }
+    }
+}
+
+.highlight {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: $color-text-main;
+    border-radius: 2px;
+}
+
+.cta {
+    .cartIcon {
+        font-size: 1.2rem;
+        color: $color-text-main;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

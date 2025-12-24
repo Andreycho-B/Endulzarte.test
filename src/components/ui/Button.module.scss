@@ -1,0 +1,59 @@
+@import '../../styles/variables';
+
+.button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    border-radius: $radius-pill;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-family: inherit;
+    overflow: hidden;
+
+    // Glass / Minimalist Reset
+    border: none;
+    background: transparent;
+
+    &:active {
+        transform: scale(0.96);
+    }
+
+    &.primary {
+        @include glass-button;
+        color: $color-text-main;
+
+        // Inner glow / Stroke effect (Image 0 reference)
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: $radius-pill;
+            padding: 1px; // border width
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        &:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.25);
+        }
+    }
+
+    &.outline {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        color: $color-text-body;
+
+        &:hover {
+            border-color: $color-text-main;
+            color: $color-text-main;
+        }
+    }
+}

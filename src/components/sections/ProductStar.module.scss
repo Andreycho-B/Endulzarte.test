@@ -1,0 +1,116 @@
+@import '../../styles/variables';
+
+.productStar {
+    min-height: 100vh;
+    padding: $spacing-lg $spacing-sm;
+    @include flex-center;
+    background-color: $color-primary;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1000px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.imageWrapper {
+    position: relative;
+    height: 400px;
+    background: $color-secondary;
+
+    @media (min-width: 768px) {
+        flex: 1;
+        height: auto;
+    }
+}
+
+.image {
+    transition: transform 0.8s ease;
+}
+
+.card:hover .image {
+    transform: scale(1.05);
+}
+
+.badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: white;
+    color: $color-accent;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    z-index: 2;
+    box-shadow: $shadow-soft;
+}
+
+.content {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (min-width: 768px) {
+        padding: 4rem;
+    }
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.description {
+    color: $color-text-body;
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.features {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    span {
+        font-weight: 700;
+        color: $color-text-main;
+    }
+
+    small {
+        color: $color-text-light;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        margin-top: 0.3rem;
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-family: $font-title;
+    font-size: 2rem;
+    color: $color-text-main;
+}

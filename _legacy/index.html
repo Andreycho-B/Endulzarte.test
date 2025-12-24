@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Endulzarte: El Arte del Origen. Café de especialidad y postres artesanales en una experiencia digital inmersiva.">
+    <title>Endulzarte | Vitrina Digital</title>
+
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Spline Viewer (Lightweight) -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.54/build/spline-viewer.js"></script>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+        <div class="hero__3d-container">
+            <!-- Placeholder for Spline Viewer - User needs to provide URL later -->
+            <spline-viewer url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"></spline-viewer>
+        </div>
+        <div class="hero__overlay">
+            <h1 class="hero__title">Endulzarte</h1>
+            <p class="hero__subtitle">El Arte del Origen</p>
+            <a href="#star-product" class="hero__cta">Descuir Más</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Star Product Section -->
+        <section class="product-star" id="star-product">
+            <div class="product-star__card">
+                <div class="product-star__image-wrapper">
+                    <img src="assets/img/product-star.png" alt="Café Geisha Inmaculada" class="product-star__image"
+                        loading="lazy">
+                    <div class="product-star__badge">Premium</div>
+                </div>
+                <div class="product-star__content">
+                    <h2 class="product-star__title">Geisha Inmaculada</h2>
+                    <p class="product-star__description">Una experiencia sensorial única con notas florales y cítricas.
+                    </p>
+
+                    <div class="product-star__features">
+                        <div class="feature">
+                            <span class="feature__icon">⛰️</span>
+                            <span class="feature__text">1800m</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature__icon">🍒</span>
+                            <span class="feature__text">Floral</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature__icon">📍</span>
+                            <span class="feature__text">Colombia</span>
+                        </div>
+                    </div>
+
+                    <div class="product-star__footer">
+                        <span class="product-star__price">$45.000</span>
+                        <button class="btn btn--gold">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section (Parallax) -->
+        <section class="history" id="history">
+            <div class="history__background"></div>
+            <div class="history__content fade-in-up">
+                <h2 class="history__title">Nuestra Historia</h2>
+                <p class="history__text">
+                    Nacimos en las montañas, donde el viento acaricia los cafetales y el sol madura cada grano con
+                    paciencia.
+                    Cada taza cuenta la historia de manos campesinas y tradiciones ancestrales.
+                </p>
+                <a href="#" class="btn btn--outline">Leer Historia</a>
+            </div>
+        </section>
+
+        <!-- Dessert Carousel Section -->
+        <section class="desserts" id="desserts">
+            <h2 class="desserts__title">Dulces Momentos</h2>
+            <div class="desserts__carousel">
+                <!-- Carousel Item 1 -->
+                <div class="dessert-card">
+                    <img src="assets/img/dessert-1.png" alt="Tiramisú Artesanal" class="dessert-card__img"
+                        loading="lazy">
+                    <div class="dessert-card__info">
+                        <h3>Tiramisú Artesanal</h3>
+                        <span>$12.000</span>
+                    </div>
+                </div>
+                <!-- Carousel Item 2 -->
+                <div class="dessert-card">
+                    <img src="assets/img/dessert-2.png" alt="Cheesecake de Frutos Rojos" class="dessert-card__img"
+                        loading="lazy">
+                    <div class="dessert-card__info">
+                        <h3>Cheesecake</h3>
+                        <span>$14.000</span>
+                    </div>
+                </div>
+                <!-- Carousel Item 3 -->
+                <div class="dessert-card">
+                    <img src="assets/img/dessert-3.png" alt="Torta de Chocolate" class="dessert-card__img"
+                        loading="lazy">
+                    <div class="dessert-card__info">
+                        <h3>Volcán de Chocolate</h3>
+                        <span>$16.000</span>
+                    </div>
+                </div>
+                <!-- Carousel Item 4 -->
+                <div class="dessert-card">
+                    <img src="assets/img/dessert-4.png" alt="Macarons" class="dessert-card__img" loading="lazy">
+                    <div class="dessert-card__info">
+                        <h3>Macarons</h3>
+                        <span>$10.000</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer__content">
+            <h3 class="footer__logo">Endulzarte</h3>
+            <p class="footer__catchphrase">Elevando tus sentidos.</p>
+            <div class="footer__socials">
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="Facebook">FB</a>
+                <a href="#" aria-label="TikTok">TK</a>
+            </div>
+            <p class="footer__copyright">© 2024 Endulzarte. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/1234567890" class="fab-whatsapp" aria-label="Chat en WhatsApp" target="_blank">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="white">
+            <path
+                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.151-.174.2-.298.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+        </svg>
+    </a>
+
+    <!-- Bottom Navigation Bar (Mobile) -->
+    <nav class="bottom-nav">
+        <a href="#hero" class="bottom-nav__item active">
+            <span class="bottom-nav__icon">☕</span>
+            <span class="bottom-nav__label">Inicio</span>
+        </a>
+        <a href="#star-product" class="bottom-nav__item">
+            <span class="bottom-nav__icon">⭐</span>
+            <span class="bottom-nav__label">Destacado</span>
+        </a>
+        <a href="#history" class="bottom-nav__item">
+            <span class="bottom-nav__icon">📖</span>
+            <span class="bottom-nav__label">Historia</span>
+        </a>
+        <a href="#desserts" class="bottom-nav__item">
+            <span class="bottom-nav__icon">🍰</span>
+            <span class="bottom-nav__label">Postres</span>
+        </a>
+    </nav>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

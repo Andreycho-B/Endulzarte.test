@@ -1,0 +1,51 @@
+@import '../../styles/variables';
+
+.chartContainer {
+    margin-bottom: 3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heading {
+    font-family: $font-display;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: $color-text-main;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.svgWrapper {
+    width: 100%;
+    max-width: 350px;
+    position: relative;
+}
+
+.svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.gridLine {
+    fill: none;
+    stroke: rgba(0, 0, 0, 0.1);
+    stroke-width: 1;
+}
+
+.dataPoly {
+    fill: rgba(212, 175, 55, 0.4); // Gold transparent
+    stroke: #D4AF37;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+}
+
+.axisLabel {
+    font-family: $font-main;
+    font-size: 12px;
+    fill: $color-text-body;
+    font-weight: 600;
+    text-transform: uppercase;
+}

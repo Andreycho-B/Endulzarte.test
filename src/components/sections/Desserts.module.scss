@@ -1,0 +1,62 @@
+@import '../../styles/variables';
+
+.desserts {
+    padding: $spacing-lg 0 8rem; // Extra bottom padding for floating nav
+    background-color: $color-secondary;
+}
+
+.title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    color: $color-text-main;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 2.5rem;
+    padding: 0 $spacing-sm 3rem;
+
+    // Hide scrollbar
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.card {
+    flex: 0 0 300px;
+    scroll-snap-align: center;
+    border: none;
+
+    &:hover {
+        transform: translateY(-10px);
+        box-shadow: $shadow-hover;
+    }
+}
+
+.imageWrapper {
+    position: relative;
+    height: 280px;
+    width: 100%;
+}
+
+.info {
+    padding: 2rem;
+    text-align: center;
+    background: white;
+
+    h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    span {
+        display: block;
+        color: $color-accent;
+        font-weight: 700;
+    }
+}

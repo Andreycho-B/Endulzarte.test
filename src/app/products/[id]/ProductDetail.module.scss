@@ -1,0 +1,114 @@
+@import '../../../styles/variables';
+
+.detailMain {
+    min-height: 100vh;
+    padding: 8rem $spacing-page 4rem;
+    background: $color-bg;
+}
+
+.backLink {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: $color-text-light;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+        color: $color-text-main;
+        border-color: $color-text-main;
+    }
+}
+
+.topSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 6rem;
+    align-items: center;
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.imageCard {
+    background: $color-surface;
+    border-radius: $radius-card;
+    padding: 2rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: $shadow-soft;
+    width: 100%;
+    min-height: 400px; // Ensure height even if image fails
+    overflow: hidden;
+
+    img {
+        z-index: 1; // Ensure image is above background but below tag if needed
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.tag {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem; // Moved to right to avoid overlap with left-aligned title or image text
+    left: auto;
+    z-index: 10; // Ensure it's on top
+    background: #111;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.infoColumn {
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+    }
+
+    .price {
+        font-size: 1.5rem;
+        color: #D4AF37;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        max-width: 500px;
+    }
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+}
+
+.techGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: flex-start;
+    margin-bottom: 4rem;
+    padding: 4rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+    }
+}

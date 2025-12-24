@@ -1,0 +1,77 @@
+@import '../../styles/variables';
+
+.footer {
+    background: $color-bg;
+    padding: 5rem 2rem 5rem;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    font-family: $font-display;
+    font-size: 1.5rem;
+    color: $color-text-main;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.catchphrase {
+    color: $color-text-body;
+    margin-bottom: 3rem;
+    font-size: 0.95rem;
+}
+
+.contactInfo {
+    display: flex;
+    gap: 4rem;
+    margin-bottom: 3rem;
+    text-align: center; // Center text in blocks
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+.infoBlock {
+    h4 {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: $color-text-light;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+        color: $color-text-main;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+}
+
+.socials {
+    @include flex-center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+
+    a {
+        font-weight: 600;
+        color: $color-text-main;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+
+        &:hover {
+            color: $color-text-light;
+        }
+    }
+}
+
+.copyright {
+    color: $color-text-light;
+    font-size: 0.75rem;
+}

@@ -6,14 +6,20 @@ import { Suspense, useState, useEffect } from 'react';
 import styles from './InteractiveCard.module.scss';
 import { Color } from 'three';
 
+// Shared Props Interface
+interface ModelProps {
+    resolution?: number;
+    samples?: number;
+}
+
 // Variant 1: Donut (Glassy Pink)
-function ProceduralDonut() {
+function ProceduralDonut({ resolution = 512, samples = 6 }: ModelProps) {
     return (
         <mesh rotation={[Math.PI / 2.5, 0, 0]} scale={[1.5, 1.5, 1.5]}>
             <torusGeometry args={[0.8, 0.4, 24, 48]} /> {/* Optimized Segments */}
             <MeshTransmissionMaterial
                 backside
-                backsideThickness={1} // Reduced
+                backsideThickness={1}
                 thickness={2}
                 chromaticAberration={0.8}
                 anisotropy={1}
@@ -22,15 +28,15 @@ function ProceduralDonut() {
                 temporalDistortion={2}
                 color="#FF69B4"
                 roughness={0.1}
-                resolution={512} // Optimized Resolution
-                samples={6}      // Optimized Samples
+                resolution={resolution}
+                samples={samples}
             />
         </mesh>
     );
 }
 
 // Variant 2: Cupcake (Frosted Glass)
-function ProceduralCupcake() {
+function ProceduralCupcake({ resolution = 512, samples = 6 }: ModelProps) {
     return (
         <group scale={[1.5, 1.5, 1.5]} position={[0, -0.5, 0]}>
             {/* Base */}
@@ -47,8 +53,8 @@ function ProceduralCupcake() {
                     distortion={0.5}
                     color="#87CEEB"
                     roughness={0.1}
-                    resolution={512}
-                    samples={6}
+                    resolution={resolution}
+                    samples={samples}
                 />
             </mesh>
             {/* Cherry (Red Glass) */}
@@ -61,7 +67,7 @@ function ProceduralCupcake() {
 }
 
 // Variant 3: Abstract Candy (Mint Glass)
-function ProceduralCandy() {
+function ProceduralCandy({ resolution = 512, samples = 6 }: ModelProps) {
     return (
         <mesh rotation={[0, 0, 0]} scale={[1.3, 1.3, 1.3]}>
             <icosahedronGeometry args={[1, 0]} />
@@ -72,8 +78,8 @@ function ProceduralCandy() {
                 distortion={1}
                 distortionScale={0.5}
                 color="#98FB98"
-                resolution={512}
-                samples={6}
+                resolution={resolution}
+                samples={samples}
             />
         </mesh>
     );
@@ -98,22 +104,23 @@ export default function InteractiveCard({
 }: InteractiveCardProps) {
     const ModelComponent = MODELS[variant] || ProceduralDonut;
 
-    // Deferred Loading & Mobile Check
+    // Mobile Check for Performance Tuning (not hiding)
     const [isMobile, setIsMobile] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        // Check if mobile
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
-
-        // Delay mounting
-        const timer = setTimeout(() => setIsMounted(true), 500);
-
+        const timer = setTimeout(() => setIsMounted(true), 100); // Faster mount
         return () => clearTimeout(timer);
     }, []);
 
-    // Static Image Mapping
+    // Performance Props based on Device
+    const dpr: [number, number] = isMobile ? [1, 1] : [1, 1.5]; // Explicit tuple type
+    const resolution = isMobile ? 256 : 512;
+    const samples = isMobile ? 4 : 6;
+
+    // Static Image Mapping (no longer used for fallback, but kept if needed elsewhere)
     const IMAGES = {
         donut: '/assets/img/dessert-1.png',
         cupcake: '/assets/img/dessert-2.png',
@@ -125,20 +132,12 @@ export default function InteractiveCard({
             <div className={styles.canvasWrapper}>
                 {!isMounted ? (
                     <div className={styles.loader} />
-                ) : isMobile ? (
-                    // Mobile Fallback: Static Image
-                    <img
-                        src={IMAGES[variant]}
-                        alt={title}
-                        style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2rem' }}
-                    />
                 ) : (
-                    // Desktop: Heavy 3D Context
-                    <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, 0, 4], fov: 50 }}>
+                    <Canvas shadows={!isMobile} dpr={dpr} camera={{ position: [0, 0, 4], fov: 50 }}>
                         <Suspense fallback={null}>
-                            <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+                            <Float speed={isMobile ? 1 : 2} rotationIntensity={0.5} floatIntensity={0.5}>
                                 <Stage environment="city" intensity={0.5} shadows={false}>
-                                    <ModelComponent />
+                                    <ModelComponent resolution={resolution} samples={samples} />
                                 </Stage>
                             </Float>
                         </Suspense>

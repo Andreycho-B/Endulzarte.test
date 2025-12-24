@@ -112,6 +112,11 @@
     letter-spacing: -2px;
     font-weight: 700;
 
+    @media (max-width: 768px) {
+        font-size: 3.5rem; // Smaller on mobile for better fit
+        letter-spacing: -1px;
+    }
+
     .highlight {
         color: transparent;
         background: linear-gradient(90deg, #111, #555);

@@ -37,7 +37,8 @@
 
 .dataPoly {
     // Fill handled in JSX for SVG compatibility
-    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+    // Fill handled in JSX for SVG compatibility
+    // Removed filter for mobile stability
 }
 
 .axisLabel {

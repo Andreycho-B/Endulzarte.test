@@ -54,8 +54,8 @@ export default function SensoryRadar({ data }: Props) {
                         stroke="#D4AF37"
                         strokeWidth="2"
                         initial={{ scale: 0, opacity: 0, originX: '50%', originY: '50%' }}
-                        whileInView={{ scale: 1, opacity: 0.8 }}
-                        transition={{ duration: 1, ease: "easeOut" }}
+                        animate={{ scale: 1, opacity: 0.8 }}
+                        transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                     />
 
                     {/* Labels */}

@@ -36,9 +36,7 @@ export default function Navbar() {
                         );
                     })}
                 </ul>
-                <div className={styles.cta}>
-                    <Link href="/products" className={styles.cartIcon}>🛒</Link>
-                </div>
+                {/* Cart Icon Removed as requested */}
             </motion.div>
         </nav>
     );

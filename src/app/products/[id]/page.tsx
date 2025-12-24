@@ -52,9 +52,8 @@ export default async function ProductDetail({ params }: { params: Promise<{ id: 
                     <p className={styles.description}>{product.description}</p>
 
                     <div className={styles.actions}>
-                        <Button variant="primary">Añadir al Carrito</Button>
                         <Link href={`https://wa.me/573132721024?text=Hola,%20me%20interesa%20el%20producto%20${encodeURIComponent(product.name)}`} target="_blank">
-                            <Button variant="outline">Consultar WhatsApp</Button>
+                            <Button variant="primary">Consultar WhatsApp</Button>
                         </Link>
                     </div>
                 </div>

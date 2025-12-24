@@ -50,6 +50,9 @@ export default function SensoryRadar({ data }: Props) {
                     <motion.polygon
                         points={points}
                         className={styles.dataPoly}
+                        fill="rgba(212, 175, 55, 0.5)"
+                        stroke="#D4AF37"
+                        strokeWidth="2"
                         initial={{ scale: 0, opacity: 0, originX: '50%', originY: '50%' }}
                         whileInView={{ scale: 1, opacity: 0.8 }}
                         transition={{ duration: 1, ease: "easeOut" }}

@@ -36,10 +36,8 @@
 }
 
 .dataPoly {
-    fill: rgba(212, 175, 55, 0.4); // Gold transparent
-    stroke: #D4AF37;
-    stroke-width: 2;
-    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+    // Fill handled in JSX for SVG compatibility
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
 }
 
 .axisLabel {

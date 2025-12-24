@@ -98,23 +98,42 @@ export default function InteractiveCard({
 }: InteractiveCardProps) {
     const ModelComponent = MODELS[variant] || ProceduralDonut;
 
-    // Deferred Loading State
+    // Deferred Loading & Mobile Check
+    const [isMobile, setIsMobile] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        // Delay mounting the heavy Canvas until page transition is likely done (500ms)
+        // Check if mobile
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+
+        // Delay mounting
         const timer = setTimeout(() => setIsMounted(true), 500);
+
         return () => clearTimeout(timer);
     }, []);
+
+    // Static Image Mapping
+    const IMAGES = {
+        donut: '/assets/img/dessert-1.png',
+        cupcake: '/assets/img/dessert-2.png',
+        candy: '/assets/img/dessert-3.png',
+    };
 
     return (
         <div className={styles.cardContainer}>
             <div className={styles.canvasWrapper}>
                 {!isMounted ? (
-                    // Lightweight Placeholder
                     <div className={styles.loader} />
+                ) : isMobile ? (
+                    // Mobile Fallback: Static Image
+                    <img
+                        src={IMAGES[variant]}
+                        alt={title}
+                        style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '2rem' }}
+                    />
                 ) : (
-                    // Heavy 3D Context
+                    // Desktop: Heavy 3D Context
                     <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, 0, 4], fov: 50 }}>
                         <Suspense fallback={null}>
                             <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>

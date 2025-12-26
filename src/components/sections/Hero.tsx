@@ -14,6 +14,7 @@ export default function Hero() {
 
             {/* Background Fluid Shape Only (No CoffeeScene) */}
             <div className={styles.visualLayer}>
+                <div className={styles.gradientPillars} />
                 <div className={styles.fluidShape} />
             </div>
 

@@ -1,6 +1,17 @@
-import React from 'react';
-import styles from './Card.module.scss';
+'use client';
 
-export const Card = ({ children, className }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`${styles.card} ${className || ''}`}>{children}</div>;
+import styles from './Card.module.scss';
+import { ReactNode } from 'react';
+
+interface CardProps {
+    children: ReactNode;
+    className?: string;
+}
+
+export const Card = ({ children, className = '' }: CardProps) => {
+    return (
+        <div className={`${styles.card} ${className}`}>
+            {children}
+        </div>
+    );
 };

@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stage, Float, MeshTransmissionMaterial } from '@react-three/drei';
+import { OrbitControls, Stage, Float } from '@react-three/drei';
 import { Suspense, useState, useEffect } from 'react';
 import styles from './InteractiveCard.module.scss';
 import { Color } from 'three';
@@ -10,76 +10,59 @@ import { Color } from 'three';
 interface ModelProps {
     resolution?: number;
     samples?: number;
+    isMobile?: boolean;
 }
 
-// Variant 1: Donut (Glassy Pink)
-function ProceduralDonut({ resolution = 512, samples = 6 }: ModelProps) {
+// Variant 1: Donut (Standard Pink)
+function ProceduralDonut({ isMobile = false }: ModelProps) {
     return (
         <mesh rotation={[Math.PI / 2.5, 0, 0]} scale={[1.5, 1.5, 1.5]}>
-            <torusGeometry args={[0.8, 0.4, 24, 48]} /> {/* Optimized Segments */}
-            <MeshTransmissionMaterial
-                backside
-                backsideThickness={1}
-                thickness={2}
-                chromaticAberration={0.8}
-                anisotropy={1}
-                distortion={0.5}
-                distortionScale={1}
-                temporalDistortion={2}
+            {/* Reduced segments for mobile */}
+            <torusGeometry args={isMobile ? [0.8, 0.4, 16, 32] : [0.8, 0.4, 24, 48]} />
+            <meshStandardMaterial
                 color="#FF69B4"
-                roughness={0.1}
-                resolution={resolution}
-                samples={samples}
+                roughness={0.3}
+                metalness={0.1}
             />
         </mesh>
     );
 }
 
-// Variant 2: Cupcake (Frosted Glass)
-function ProceduralCupcake({ resolution = 512, samples = 6 }: ModelProps) {
+// Variant 2: Cupcake (Standard Blue Frosting)
+function ProceduralCupcake({ isMobile = false }: ModelProps) {
     return (
         <group scale={[1.5, 1.5, 1.5]} position={[0, -0.5, 0]}>
             {/* Base */}
             <mesh>
-                <cylinderGeometry args={[0.6, 0.4, 0.8, 24]} /> {/* Optimized Segments */}
+                <cylinderGeometry args={isMobile ? [0.6, 0.4, 0.8, 16] : [0.6, 0.4, 0.8, 24]} />
                 <meshStandardMaterial color="#F4A460" />
             </mesh>
-            {/* Frosting (Icy Blue Glass) */}
+            {/* Frosting (Solid Blue) */}
             <mesh position={[0, 0.5, 0]}>
-                <sphereGeometry args={[0.65, 24, 24]} /> {/* Optimized Segments */}
-                <MeshTransmissionMaterial
-                    thickness={2}
-                    chromaticAberration={0.5}
-                    distortion={0.5}
+                <sphereGeometry args={isMobile ? [0.65, 16, 16] : [0.65, 24, 24]} />
+                <meshStandardMaterial
                     color="#87CEEB"
-                    roughness={0.1}
-                    resolution={resolution}
-                    samples={samples}
+                    roughness={0.3}
                 />
             </mesh>
-            {/* Cherry (Red Glass) */}
+            {/* Cherry (Red) */}
             <mesh position={[0, 1.1, 0]}>
-                <sphereGeometry args={[0.15, 12, 12]} /> {/* Optimized Segments */}
-                <meshStandardMaterial color="#FF0000" roughness={0} />
+                <sphereGeometry args={isMobile ? [0.15, 8, 8] : [0.15, 12, 12]} />
+                <meshStandardMaterial color="#FF0000" roughness={0.1} />
             </mesh>
         </group>
     );
 }
 
-// Variant 3: Abstract Candy (Mint Glass)
-function ProceduralCandy({ resolution = 512, samples = 6 }: ModelProps) {
+// Variant 3: Abstract Candy (Standard Green)
+function ProceduralCandy({ isMobile = false }: ModelProps) {
     return (
         <mesh rotation={[0, 0, 0]} scale={[1.3, 1.3, 1.3]}>
             <icosahedronGeometry args={[1, 0]} />
-            <MeshTransmissionMaterial
-                thickness={3}
-                chromaticAberration={1}
-                anisotropy={0.5}
-                distortion={1}
-                distortionScale={0.5}
+            <meshStandardMaterial
                 color="#98FB98"
-                resolution={resolution}
-                samples={samples}
+                roughness={0.3}
+                metalness={0.1}
             />
         </mesh>
     );
@@ -111,12 +94,18 @@ export default function InteractiveCard({
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
+        const resizeListener = () => checkMobile();
+        window.addEventListener('resize', resizeListener);
+
         const timer = setTimeout(() => setIsMounted(true), 100); // Faster mount
-        return () => clearTimeout(timer);
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('resize', resizeListener);
+        }
     }, []);
 
     // Performance Props based on Device
-    const dpr: [number, number] = isMobile ? [1, 1] : [1, 1.5]; // Explicit tuple type
+    const dpr: [number, number] = isMobile ? [1, 1.5] : [1, 2]; // Slightly better dpr for mobile but capped
     const resolution = isMobile ? 256 : 512;
     const samples = isMobile ? 4 : 6;
 
@@ -137,7 +126,11 @@ export default function InteractiveCard({
                         <Suspense fallback={null}>
                             <Float speed={isMobile ? 1 : 2} rotationIntensity={0.5} floatIntensity={0.5}>
                                 <Stage environment="city" intensity={0.5} shadows={false}>
-                                    <ModelComponent resolution={resolution} samples={samples} />
+                                    <ModelComponent
+                                        resolution={resolution}
+                                        samples={samples}
+                                        isMobile={isMobile}
+                                    />
                                 </Stage>
                             </Float>
                         </Suspense>
